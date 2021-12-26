@@ -2,6 +2,8 @@
     This code comes from https://codepen.io/mdeken/pen/exxawB
 */
 
+import * as d3 from "https://cdn.skypack.dev/d3@5";
+
 function graphChart () {
     let width = 500;
     let height = 500;
@@ -265,20 +267,20 @@ function graphChart () {
     };
     
     return chart;
-  }
+}
   
-  const renameNodesProperties = (d) => ({
+const renameNodesProperties = (d) => ({
     id: d.Id,
     label: d.Label,
-  });
+});
   
-  const renameEdgesProperties = (d) => ({
+const renameEdgesProperties = (d) => ({
     source: d.Source,
     target: d.Target,
     weight: +d.Weight,
-  });
+});
   
-  const datasets = [
+const datasets = [
     ['https://raw.githubusercontent.com/madeka/gameofthrones/master/data/got-s1-nodes.csv', 'https://raw.githubusercontent.com/madeka/gameofthrones/master/data/got-s1-edges.csv'],
     ['https://raw.githubusercontent.com/mathbeveridge/gameofthrones/master/data/got-s2-nodes.csv', 'https://raw.githubusercontent.com/mathbeveridge/gameofthrones/master/data/got-s2-edges.csv'],
     ['https://raw.githubusercontent.com/mathbeveridge/gameofthrones/master/data/got-s3-nodes.csv', 'https://raw.githubusercontent.com/mathbeveridge/gameofthrones/master/data/got-s3-edges.csv'],
@@ -288,17 +290,17 @@ function graphChart () {
     ['https://raw.githubusercontent.com/mathbeveridge/gameofthrones/master/data/got-s7-nodes.csv', 'https://raw.githubusercontent.com/mathbeveridge/gameofthrones/master/data/got-s7-edges.csv'],
     ['https://raw.githubusercontent.com/madeka/gameofthrones/master/data/got-s8-nodes.csv',
      'https://raw.githubusercontent.com/madeka/gameofthrones/master/data/got-s8-edges.csv'],
-  ];
+];
   
-  const getDataFromSeason = (i) => [
+const getDataFromSeason = (i) => [
     d3.csv(datasets[i][0], renameNodesProperties),
     d3.csv(datasets[i][1], renameEdgesProperties),
-  ];
+];
   
-  const width = parseInt(d3.select('#d3-graph').style('width'));
-  const height = parseInt(d3.select('#d3-graph').style('height'));
+const width = parseInt(d3.select('#d3-graph').style('width'));
+const height = parseInt(d3.select('#d3-graph').style('height'));
   
-  const graph = graphChart()
+const graph = graphChart()
     .width(width)
     .height((height > 500) ? height : 500)
     .fillNode('#758686')
@@ -308,12 +310,12 @@ function graphChart () {
     .fillText('#fff')
     .strokeLinkHover(d3.rgb(250, 250, 250, 1));
   
-  const countLinks = (node, graphEdges) => graphEdges.reduce((total, link) => {
+const countLinks = (node, graphEdges) => graphEdges.reduce((total, link) => {
     if (node.id === link.source || node.id === link.target) total += 1;
     return total;
-  }, 0);
+}, 0);
   
-  const draw_dataset = (i) => {
+const draw_dataset = (i) => {
       Promise
       .all(getDataFromSeason(i))
       .then((data) => {
@@ -329,9 +331,9 @@ function graphChart () {
   
           d3.select("#d3-graph").datum(graph_data).call(graph);
     })
-  }
+}
   
-  d3.selectAll('.button').on('click', function(d, i) {
+d3.selectAll('.button').on('click', function(d, i) {
     d3.selectAll('.button.active')
       .attr('class', 'button');
     d3.select(this)
@@ -339,7 +341,7 @@ function graphChart () {
     d3.select('#force-directed-graph').remove();
     
     draw_dataset(i);
-  });
+});
   
-  d3.select('.button:first-child').attr('class', 'button active');
-  draw_dataset(0);
+d3.select('.button:first-child').attr('class', 'button active');
+draw_dataset(0);

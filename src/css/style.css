@@ -11,13 +11,15 @@ html, body {
 body {
   background-color: #494853;
   font-family: 'Cinzel', serif;
+  align-content: center;
+  overflow: hidden;
 }
 
 svg {
   display: block;
   margin: auto;
   width: 100%;
-  min-height: 87vh;
+  min-height: 90vh;
 }
 
 .header {
