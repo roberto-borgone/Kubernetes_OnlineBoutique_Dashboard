@@ -1,0 +1,49 @@
+/* 
+    This code comes from https://codepen.io/mdeken/pen/exxawB
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Cinzel');
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: #494853;
+  font-family: 'Cinzel', serif;
+}
+
+svg {
+  display: block;
+  margin: auto;
+  width: 100%;
+  min-height: 87vh;
+}
+
+.header {
+  min-height: 10vh;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+a {
+  display: inline-block;
+  padding: 0.6em 1em;
+  margin: 0.6em;
+  background-color: #b38a38;
+  color: #fff;
+  border: none;
+  font-size: 1rem;
+  border-radius: 5%;
+}
+
+a:hover {
+  background-color: #9d3a43;
+  transition: all 0.6s;
+}
+
+a.active {
+  background-color: #9d3a43;
+}
