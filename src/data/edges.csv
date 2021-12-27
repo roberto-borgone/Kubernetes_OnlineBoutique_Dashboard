@@ -1,0 +1,15 @@
+Source,Target
+frontend,adservice
+frontend,checkoutservice
+frontend,shippingservice
+frontend,currencyservice
+frontend,productcatalogservice
+frontend,recommendationservice
+frontend,cartservice
+checkoutservice,emailservice
+checkoutservice,paymentservice
+checkoutservice,shippingservice
+checkoutservice,currencyservice
+checkoutservice,productcatalogservice
+recommendationservice,productcatalogservice
+cartservice,redis-cart

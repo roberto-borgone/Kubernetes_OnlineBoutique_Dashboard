@@ -1,0 +1,12 @@
+Id,Label
+adservice,AdService
+cartservice,CartService
+checkoutservice,CheckoutService
+currencyservice,CurrencyService
+emailservice,EmailService
+frontend,Frontend
+paymentservice,PaymentService
+productcatalogservice,ProductCatalogService
+recommendationservice,RecommendationService
+redis-cart,Cache(redis)
+shippingservice,ShippingService
