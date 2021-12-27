@@ -277,24 +277,15 @@ const renameNodesProperties = (d) => ({
 const renameEdgesProperties = (d) => ({
     source: d.Source,
     target: d.Target,
-    weight: +d.Weight,
 });
   
-const datasets = [
-    ['https://raw.githubusercontent.com/madeka/gameofthrones/master/data/got-s1-nodes.csv', 'https://raw.githubusercontent.com/madeka/gameofthrones/master/data/got-s1-edges.csv'],
-    ['https://raw.githubusercontent.com/mathbeveridge/gameofthrones/master/data/got-s2-nodes.csv', 'https://raw.githubusercontent.com/mathbeveridge/gameofthrones/master/data/got-s2-edges.csv'],
-    ['https://raw.githubusercontent.com/mathbeveridge/gameofthrones/master/data/got-s3-nodes.csv', 'https://raw.githubusercontent.com/mathbeveridge/gameofthrones/master/data/got-s3-edges.csv'],
-    ['https://raw.githubusercontent.com/madeka/gameofthrones/missing-nodes/data/got-s4-nodes.csv', 'https://raw.githubusercontent.com/madeka/gameofthrones/missing-nodes/data/got-s4-edges.csv'],
-    ['https://raw.githubusercontent.com/madeka/gameofthrones/missing-nodes/data/got-s5-node.csv', 'https://raw.githubusercontent.com/madeka/gameofthrones/missing-nodes/data/got-s5-edges.csv'],
-    ['https://raw.githubusercontent.com/madeka/gameofthrones/missing-nodes/data/got-s6-nodes.csv', 'https://raw.githubusercontent.com/madeka/gameofthrones/missing-nodes/data/got-s6-edges.csv'],
-    ['https://raw.githubusercontent.com/mathbeveridge/gameofthrones/master/data/got-s7-nodes.csv', 'https://raw.githubusercontent.com/mathbeveridge/gameofthrones/master/data/got-s7-edges.csv'],
-    ['https://raw.githubusercontent.com/madeka/gameofthrones/master/data/got-s8-nodes.csv',
-     'https://raw.githubusercontent.com/madeka/gameofthrones/master/data/got-s8-edges.csv'],
-];
+const datasets = 
+    ['https://raw.githubusercontent.com/madeka/gameofthrones/master/data/got-s1-nodes.csv', 'https://raw.githubusercontent.com/madeka/gameofthrones/master/data/got-s1-edges.csv']
+;
   
-const getDataFromSeason = (i) => [
-    d3.csv(datasets[i][0], renameNodesProperties),
-    d3.csv(datasets[i][1], renameEdgesProperties),
+const getDataFromSeason = () => [
+    d3.csv(datasets[0], renameNodesProperties),
+    d3.csv(datasets[1], renameEdgesProperties),
 ];
   
 const width = parseInt(d3.select('#d3-graph').style('width'));
@@ -315,9 +306,9 @@ const countLinks = (node, graphEdges) => graphEdges.reduce((total, link) => {
     return total;
 }, 0);
   
-const draw_dataset = (i) => {
+const draw_dataset = () => {
       Promise
-      .all(getDataFromSeason(i))
+      .all(getDataFromSeason())
       .then((data) => {
         const graph_data = {
           nodes: data[0],
@@ -333,15 +324,4 @@ const draw_dataset = (i) => {
     })
 }
   
-d3.selectAll('.button').on('click', function(d, i) {
-    d3.selectAll('.button.active')
-      .attr('class', 'button');
-    d3.select(this)
-      .attr('class', 'button active');
-    d3.select('#force-directed-graph').remove();
-    
-    draw_dataset(i);
-});
-  
-d3.select('.button:first-child').attr('class', 'button active');
-draw_dataset(0);
+draw_dataset();
