@@ -2,7 +2,7 @@
     This code comes from https://codepen.io/mdeken/pen/exxawB
 */
 
-@import url('https://fonts.googleapis.com/css?family=Cinzel');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@500;900&display=swap');
 
 html, body {
   height: 100%;
@@ -10,42 +10,73 @@ html, body {
 
 body {
   background-color: #494853;
-  font-family: 'Cinzel', serif;
-  align-content: center;
+  font-family: 'Noto Sans Mono', monospace;
   overflow: hidden;
 }
 
 svg {
   display: block;
   margin: auto;
-  width: 100%;
-  min-height: 90vh;
+  width: 66.66%;
+  min-height: 100%;
 }
 
 .header {
   min-height: 10vh;
   display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  font-weight: 900;
+  font-size: 2rem;
+  color: #fff;
+  padding-left: 7.5vw;
+  padding-right: 7.5vw;
+}
+
+.content {
+  display: flex;
   justify-content: center;
   flex-wrap: wrap;
   align-items: center;
+  min-height: 90vh;
+}
+
+.info-panel{
+  display: block;
+  margin: auto;
+  width: 33.33%;
+  height: 100%;
 }
 
 a {
   display: inline-block;
   padding: 0.6em 1em;
   margin: 0.6em;
-  background-color: #b38a38;
+  background-color: #758686;
   color: #fff;
   border: none;
   font-size: 1rem;
-  border-radius: 5%;
+  border-radius: 5px;
+  border-color: #494853;
+  cursor: pointer;
 }
 
 a:hover {
-  background-color: #9d3a43;
+  background-color: #EDFF71;
   transition: all 0.6s;
+  color: #494853;
 }
 
 a.active {
-  background-color: #9d3a43;
+  background-color: #EDFF71;
+  color: #494853;
+}
+
+.nodes {
+  cursor: grab;
+}
+
+.nodes:active {
+  cursor: grabbing;
 }

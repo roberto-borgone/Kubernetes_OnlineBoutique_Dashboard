@@ -7,15 +7,15 @@ import * as d3 from "https://cdn.skypack.dev/d3@5";
 function graphChart () {
     let width = 500;
     let height = 500;
-    let fillNode = '#07a0c3';
-    let strokeNode = '#fff';
-    let fillNodeHover = '#E47F74';
-    let fillNeighbors = '#f0c808';
-    let fillText = '#333';
+    let fillNode = '#758686';
+    let strokeNode = '#494853';
+    let fillNodeHover = '#FD151B';
+    let fillNeighbors = '#FFB30F';
+    let fillText = '#fff';
     let strokeLink = d3.rgb(150, 150, 150, 0.6);
     let strokeLinkHover = d3.rgb(50, 50, 50, 1);
-    let minRadius = 5;
-    let radius = (node) => minRadius + (node.weight * 0.7);
+    let minRadius = 20;
+    let radius = (node) => minRadius + (node.weight * 12);
     
     const chart = (selection) => selection.each(function (data) {
       const handleZoom = () => {
@@ -33,8 +33,8 @@ function graphChart () {
         .call(zoom);
                 
       const simulation = d3.forceSimulation(data.nodes)
-        .force('link', d3.forceLink(data.edges).id((d) => d.id).distance(50))
-        .force('charge', d3.forceManyBody().strength((d) => (-radius(d) * 30)))
+        .force('link', d3.forceLink(data.edges).id((d) => d.id).distance(180))
+        .force('charge', d3.forceManyBody().strength((d) => (-radius(d) * 40)))
         .force('center', d3.forceCenter(width / 3, height / 2))
         .force('x', d3.forceX())
         .force('y', d3.forceY());
@@ -117,7 +117,7 @@ function graphChart () {
             .attr('fill', fillNode);
           
           d3.selectAll('.nodes text')
-            .filter((d, i) => ( d.weight < 17))
+            .filter((d, i) => ( d.weight < 2))
             .transition()
             .attr('fill-opacity', 0);
           
@@ -134,7 +134,7 @@ function graphChart () {
         const g = svg.append("g")
           .attr("id", "force-directed-graph");
         
-        svg.call(zoom.transform, d3.zoomIdentity.scale(0.6).translate(width / 2, height / 2));
+        svg.call(zoom.transform, d3.zoomIdentity.scale(0.6).translate(width / 2.5, height / 7));
         
         const links = g.append("g")
           .attr("class", "links")
@@ -168,12 +168,12 @@ function graphChart () {
         
         nodes
           .append("text")
-          .text((d) => (d.label.toUpperCase()))
+          .text((d) => (d.label))
           .attr('fill', fillText)
           .attr('fill-opacity', 1)
-          .attr('font-size', (d) => d.weight * 0.7)
+          .attr('font-size', (d) => d.weight * 6)
           .attr("text-anchor", "middle")
-          .filter((d, i) => ( d.weight < 17 ))
+          .filter((d, i) => ( d.weight < 3 ))
           .attr('fill-opacity', 0)
           .attr('font-size', 15);
         
@@ -280,7 +280,7 @@ const renameEdgesProperties = (d) => ({
 });
   
 const datasets = 
-    ['https://raw.githubusercontent.com/madeka/gameofthrones/master/data/got-s1-nodes.csv', 'https://raw.githubusercontent.com/madeka/gameofthrones/master/data/got-s1-edges.csv']
+    ['https://raw.githubusercontent.com/roberto-borgone/Kubernetes_OnlineBoutique_Dashboard/master/src/data/nodes.csv', 'https://raw.githubusercontent.com/roberto-borgone/Kubernetes_OnlineBoutique_Dashboard/master/src/data/edges.csv']
 ;
   
 const getDataFromSeason = () => [
@@ -296,8 +296,8 @@ const graph = graphChart()
     .height((height > 500) ? height : 500)
     .fillNode('#758686')
     .strokeNode('#494853')
-    .fillNodeHover('#9d3a43')
-    .fillNeighbors('#b38a38')
+    .fillNodeHover('#FD151B')
+    .fillNeighbors('#FFB30F')
     .fillText('#fff')
     .strokeLinkHover(d3.rgb(250, 250, 250, 1));
   
