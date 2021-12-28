@@ -81,6 +81,41 @@ function graphChart () {
           };
         }
         
+        const handleMouseClick = function (d, i) {
+          
+          $(".info.svc").html("");
+          $(".info.pod").html("");
+
+          $.getJSON("http://localhost:8080/api/v1/namespaces/sandbox-s267571/services/" + d.id, function(data){
+            let ports = "Port(s): ";
+            data.spec.ports.forEach(element => {ports += (element.port + "/" + element.protocol + " ")})
+            $(".info.svc").html(
+              "Name: " + data.metadata.name + "</br>" +
+              "Type: " + data.spec.type + "</br>" +
+              "ClusterIP: " + data.spec.clusterIP + "</br>" +
+              "ExternalIP: " + (data.status.loadBalancer?.ingress?.ip || "&ltnone&gt") + "</br>" +
+              ports + "</br>" +
+              "Age: " + (Date.now() - Date.parse(data.metadata.creationTimestamp)) + "ms"
+            );
+          })
+
+          $.getJSON("http://localhost:8080/api/v1/namespaces/sandbox-s267571/pods?labelSelector=app%3D" + d.id, function(data){
+            data.items.forEach(element => {
+              $(".info.pod").append(
+                "---" + "</br>" +
+                "Name: " + element.metadata.name + "</br>" +
+                "Ready: " + element.status.containerStatuses.filter(container => container.ready == true).length + "/" + element.status.containerStatuses.length + "</br>" +
+                "Status: " + element.status.phase + "</br>" +
+                "Restarts: " + element.status.containerStatuses.reduce((acc , container) => {return acc + container.restartCount}, 0) + "</br>" +
+                "Age: " + (Date.now() - Date.parse(element.metadata.creationTimestamp)) + "ms" + "</br>" +
+                "IP: " + element.status.podIP + "</br>" +
+                "Node: " + element.spec.nodeName + "</br>"
+              );
+            })
+          })
+
+        };
+
         const handleMouseOver = function (d, i) {
           const neighbors = getNeighbors(this);
           
@@ -135,7 +170,7 @@ function graphChart () {
         const g = svg.append("g")
           .attr("id", "force-directed-graph");
         
-        svg.call(zoom.transform, d3.zoomIdentity.scale(0.6).translate(width / 2.5, height / 7));
+        svg.call(zoom.transform, d3.zoomIdentity.scale(0.6).translate(width / 2, height / 6));
         
         const links = g.append("g")
           .attr("class", "links")
@@ -158,7 +193,7 @@ function graphChart () {
             .attr("id", d => d.id)
             .on('mouseover', handleMouseOver)
             .on('mouseout', handleMouseOut)
-            .on('click', handleMouseOver)
+            .on('click', handleMouseClick)
             .call(dragNode(simulation));
         
         nodes.append("circle")
@@ -294,7 +329,7 @@ const height = parseInt(d3.select('#d3-graph').style('height'));
   
 const graph = graphChart()
     .width(width)
-    .height((height > 500) ? height : 500)
+    .height(height)
     .fillNode('#758686')
     .strokeNode('#494853')
     .fillNodeHover('#FD151B')
@@ -327,12 +362,11 @@ const draw_dataset = () => {
   
 draw_dataset();
 
-let flip = 1;
-
 /*---------------------------------------------*/
+
+let flip = 1;
 
 $('.button.flip-button').on('click', () => {
   $(".flip-card-inner").css("transform", "rotateY(" + 180*flip + "deg)");
   flip == 1?flip=0:flip=1;
-  console.log(flip)
 })

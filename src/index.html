@@ -20,22 +20,24 @@
   
     <div class='header'>
         <p>Online Boutique Dashboard</p>
-        <a class='button'>Enter the boutique</a>
+        <a class='button title' href="https://s267571.sandbox.crownlabs.polito.it/boutique">Enter the Boutique</a>
     </div>
     <div class='content'>
-        <svg id="d3-graph"></svg>
+        <div class="graph-wrap">
+            <svg id="d3-graph"></svg>
+        </div>
         <div class='info-panel'>
             <div class="flip-card" tabIndex="0">
                 <div class="flip-card-inner">
                   <div class="flip-card-front">
-                    <h3>Deployment</h3>
-                    <p></p>
+                    <h3>Service</h3>
+                    <p class="info svc"></p>
                     <a class='button flip-button'>Pods</a>
                   </div>
                   <div class="flip-card-back">
                     <h3>Pods</h3>
-                    <p></p>
-                    <a class='button flip-button'>Deployment</a>
+                    <p class="info pod"></p>
+                    <a class='button flip-button'>Service</a>
                   </div>
                 </div>
               </div>
