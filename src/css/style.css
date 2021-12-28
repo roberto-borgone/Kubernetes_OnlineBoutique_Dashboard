@@ -1,5 +1,6 @@
 /* 
     This code comes from https://codepen.io/mdeken/pen/exxawB
+    and https://codepen.io/ananyaneogi/pen/Ezmyeb, with some personal tweaks
 */
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@500;900&display=swap');
@@ -18,7 +19,7 @@ svg {
   display: block;
   margin: auto;
   width: 66.66%;
-  min-height: 100%;
+  min-height: 90vh;
 }
 
 .header {
@@ -38,15 +39,8 @@ svg {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  align-items: center;
   min-height: 90vh;
-}
-
-.info-panel{
-  display: block;
-  margin: auto;
-  width: 33.33%;
-  height: 100%;
+  align-items: center;
 }
 
 a {
@@ -79,4 +73,71 @@ a.active {
 
 .nodes:active {
   cursor: grabbing;
+}
+
+/*---------------------------------------------------------*/
+
+.info-panel{
+  display: flex;
+  width: 33.33%;
+  height: 70vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.flip-card {
+  background-color: transparent;
+  width: 100%;
+  height: 70vh;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.flip-card:focus {
+    outline: 0;
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 70vh;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: #494853;
+  color: #fff;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.flip-card-back {
+  background-color: rgba(150, 150, 150, 0.6);
+  color: #fff;
+  transform: rotateY(180deg);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 5px;
+}
+h3 {
+  font-size: 1rem;
+  font-weight: 500;
 }

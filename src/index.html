@@ -1,3 +1,8 @@
+<!-- 
+    This code comes from https://codepen.io/mdeken/pen/exxawB
+    and https://codepen.io/ananyaneogi/pen/Ezmyeb, with some personal tweaks
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +24,22 @@
     </div>
     <div class='content'>
         <svg id="d3-graph"></svg>
-        <div class='info-panel'></div>
+        <div class='info-panel'>
+            <div class="flip-card" tabIndex="0">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <h3>Deployment</h3>
+                    <p></p>
+                    <a class='button flip-button'>Pods</a>
+                  </div>
+                  <div class="flip-card-back">
+                    <h3>Pods</h3>
+                    <p></p>
+                    <a class='button flip-button'>Deployment</a>
+                  </div>
+                </div>
+              </div>
+        </div>
     </div>
 
 <script type="module" src="scripts/graph.js"></script>

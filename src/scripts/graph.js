@@ -1,5 +1,6 @@
 /* 
     This code comes from https://codepen.io/mdeken/pen/exxawB
+    and https://codepen.io/ananyaneogi/pen/Ezmyeb, with some personal tweaks
 */
 
 import * as d3 from "https://cdn.skypack.dev/d3@5";
@@ -325,3 +326,13 @@ const draw_dataset = () => {
 }
   
 draw_dataset();
+
+let flip = 1;
+
+/*---------------------------------------------*/
+
+$('.button.flip-button').on('click', () => {
+  $(".flip-card-inner").css("transform", "rotateY(" + 180*flip + "deg)");
+  flip == 1?flip=0:flip=1;
+  console.log(flip)
+})
