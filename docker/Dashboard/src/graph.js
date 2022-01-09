@@ -86,7 +86,7 @@ function graphChart () {
           $(".info.svc").html("");
           $(".info.pod").html("");
 
-          $.getJSON("http://localhost:8001/api/v1/namespaces/sandbox-s267571/services/" + d.id, function(data){
+          $.getJSON("https://s267571.sandbox.crownlabs.polito.it/api/v1/namespaces/sandbox-s267571/services/" + d.id, function(data){
             let ports = "Port(s): ";
             data.spec.ports.forEach(element => {ports += (element.port + "/" + element.protocol + " ")})
             $(".info.svc").html(
@@ -99,7 +99,7 @@ function graphChart () {
             );
           })
 
-          $.getJSON("http://localhost:8001/api/v1/namespaces/sandbox-s267571/pods?labelSelector=app%3D" + d.id, function(data){
+          $.getJSON("https://s267571.sandbox.crownlabs.polito.it/api/v1/namespaces/sandbox-s267571/pods?labelSelector=app%3D" + d.id, function(data){
             data.items.forEach(element => {
               $(".info.pod").append(
                 "---" + "</br>" +

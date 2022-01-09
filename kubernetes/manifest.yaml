@@ -649,6 +649,8 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
   name: ingress-external
 spec:
   tls:
@@ -659,10 +661,68 @@ spec:
   - host: "s267571.sandbox.crownlabs.polito.it"
     http:
       paths:
-      - path: /
+      - path: /(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: dashboard
+            port:
+              number: 80
+      - path: /(api/.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: dashboard
+            port:
+              number: 8001
+      - path: /boutique/?(.*)
         pathType: Prefix
         backend:
           service:
             name: frontend
             port:
               number: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dashboard
+spec:
+  selector:
+    matchLabels:
+      app: dashboard
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: dashboard
+    spec:
+      containers:
+      - name: dashboard
+        image: robertoborgone/dashboard:v0.5
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+      - name: dashboard-sidecar
+        image: robertoborgone/dashboard-sidecar:v0.1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8001
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: dashboard
+spec:
+  selector:
+    app: dashboard
+  ports:
+    - name: nginx
+      protocol: TCP
+      port: 80
+      targetPort: 80
+    - name: kubectl
+      protocol: TCP
+      port: 8001
+      targetPort: 8001
+  type: ClusterIP
