@@ -649,8 +649,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
   name: ingress-external
 spec:
   tls:
@@ -661,21 +659,21 @@ spec:
   - host: "s267571.sandbox.crownlabs.polito.it"
     http:
       paths:
-      - path: /(.*)
+      - path: /dashboard
         pathType: Prefix
         backend:
           service:
             name: dashboard
             port:
               number: 80
-      - path: /(api/.*)
+      - path: /api
         pathType: Prefix
         backend:
           service:
             name: dashboard
             port:
               number: 8001
-      - path: /boutique/?(.*)
+      - path: /
         pathType: Prefix
         backend:
           service:

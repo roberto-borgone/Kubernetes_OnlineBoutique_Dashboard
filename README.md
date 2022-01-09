@@ -6,4 +6,4 @@ Simple cluster-aware web app to be exposed on [Crownlabs](https://crownlabs.poli
 - Deploy the application on the cluster along with the [LiqoTech](https://github.com/liqotech) fork of [Google's Online Boutique](https://github.com/GoogleCloudPlatform/microservices-demo) microservices demo app.
 - Configure a Kubernetes Ingress resource in order to allow reaching both apps from outside the cluster.
 
-Final result will be published on [s267571.sandbox.crownlabs.polito.it](https://s267571.sandbox.crownlabs.polito.it).
+Final result will be published on [s267571.sandbox.crownlabs.polito.it/dashboard](https://s267571.sandbox.crownlabs.polito.it/dashboard).
