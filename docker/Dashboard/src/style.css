@@ -1,0 +1,167 @@
+/* 
+    This code comes from https://codepen.io/mdeken/pen/exxawB
+    and https://codepen.io/ananyaneogi/pen/Ezmyeb, with some personal tweaks
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@500;900&display=swap');
+
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  min-width: 400px;
+}
+
+body {
+  background-color: #494853;
+  font-family: 'Noto Sans Mono', monospace;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.graph-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60%;
+  height: 100%;
+  overflow: hidden;
+}
+
+svg {
+  height: 100%;
+  width: 100%;
+}
+
+.header {
+  flex: 1;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
+  font-weight: 900;
+  font-size: 2rem;
+  color: #fff;
+  width: 100%;
+}
+
+.content {
+  flex: 4;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+}
+
+a {
+  display: inline-block;
+  padding: 0.6em 1em;
+  background-color: #758686;
+  color: #fff;
+  border: none;
+  font-size: 1rem;
+  border-radius: 5px;
+  border-color: #494853;
+  cursor: pointer;
+}
+
+a:hover {
+  background-color: #EDFF71;
+  transition: all 0.6s;
+  color: #494853;
+}
+
+a.active {
+  background-color: #EDFF71;
+  color: #494853;
+}
+
+.nodes {
+  cursor: pointer;
+}
+
+.nodes:active {
+  cursor: grabbing;
+}
+
+.button.title {
+  text-decoration: none;
+}
+
+/*---------------------------------------------------------*/
+
+.info-panel{
+  display: flex;
+  width: 30%;
+  min-width: 300px;
+  height: 75%;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.flip-card {
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.flip-card:focus {
+    outline: 0;
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: #494853;
+  color: #fff;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 5px;
+  overflow: auto;
+}
+
+.flip-card-back {
+  background-color: rgba(150, 150, 150, 0.6);
+  color: #fff;
+  transform: rotateY(180deg);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 5px;
+  overflow: auto;
+}
+h3 {
+  font-size: 1rem;
+  font-weight: 500;
+}
+.info {
+  user-select: text;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
